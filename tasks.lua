@@ -12,6 +12,12 @@ amountOfTasks = 0
 
 -- Create a task to add to a table
 function createTask()
+
+  if amountOfTasks == 100 then
+    print("Task limit (100) has been reached. No more tasks can be managed.")
+    return
+  end
+  
   -- Define task table
   local task = {}
 
@@ -84,6 +90,7 @@ function searchTaskByID(id)
       print("ID: " .. task.id)
     end
   end
+  print("------------------------------------------")
 end
 
 -- Schedule the tasks
@@ -95,6 +102,14 @@ function scheduleTasks()
       os.execute("sleep " .. task.schedule)
     end
   end
+end
+
+--Delete a task
+function deleteTask(tasks, i)
+  table.remove(tasks, i)
+  amountOfTasks = amountOfTasks - 1
+  print("Task removed.")
+  print("------------------------------------------")
 end
 
 -- Main
@@ -113,5 +128,9 @@ while continue == 'y' do
 end 
 
 --scheduleTasks()
+
+searchTaskByID(30)
+
+deleteTask(tasks, 1)
 
 searchTaskByID(30)
